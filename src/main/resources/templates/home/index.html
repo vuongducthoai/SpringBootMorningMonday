@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<ul>
+    <li><a href="/student">Student</a></li>
+    <li><a href="/customer">Customer</a></li>
+</ul>
+<div class="row">
+    <div class="col-3">
+        <ul>
+            <li th:each="o : ${categories}">
+                <a th:href="@{/home/category/{id}(id=${o.id})}" th:text="${o.name}"></a>
+                <ul>
+                    <li th:each="c: ${o.subCategories}">
+                        <a th:href="@{/home/sub/{id}(id=${c.id})}" th:text="${c.name}"></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <div class="row">
+            <div class="col-4" th:each="o : ${list}">
+                <div class="p-2 border rounded mb-2">
+                    <h2 class="h5">
+                        <a th:href="@{/home/details/{id}(id = ${o.id})}" th:text="${o.title}"></a>
+                    </h2>
+                    <a th:href="@{home/details/{id}(id=${o.id})}">
+                        <img class="img-fluid" th:src="@{/images/{url}(url=${o.imageUrl})}" th:alt="${o.title}">
+                    </a>
+
+                    <p>Price: <span th:text="${o.price}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

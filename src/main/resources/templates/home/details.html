@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<div class="row">
+    <div class="col-3">
+        <ul>
+            <li th:each="o : ${categories}">
+                <a th:href="@{/home/category/{id}(id=${o.id})}" th:text="${o.name}"></a>
+                <ul>
+                    <li th:each="c: ${o.subCategories}">
+                        <a th:href="@{/home/sub/{id}(id=${c.id})}" th:text="${c.name}"></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <div class="card">
+            <div class="card-header">
+                <h1 th:text="${obj.title}"></h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <img class="img-fluid" th:src="@{/images/{url}(url=${o.imageUrl})}" th:alt="${o.title}">
+                    </div>
+                    <div class="col-6">
+                        <p>Price: <span th:text="${obj.price}"></span></p>
+                        <p>Usage: <span th:text="${obj.usage}"></span></p>
+                        <p>Gender: <span th:text="${obj.gender}"></span></p>
+                        <form action="/cart/add" method="post">
+                            <input type="hidden" name="product.id" th:value="${obj.id}">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <input class="form-control" type="number" value="1" min="1" name="quantity">
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-primary">Add to Cart</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p>Product Relations</p>
+        <div class="row">
+            <div class="col-4" th:each="o : ${list}">
+                <div class="p-2 border rounded mb-2">
+                    <h2 class="h5">
+                        <a th:href="@{/home/details/{id}(id = ${o.id})}" th:text="${o.title}"></a>
+                    </h2>
+                    <a th:href="@{home/details/{id}(id=${o.id})}">
+                        <img class="img-fluid" th:src="@{/images/{url}(url=${o.imageUrl})}" th:alt="${o.title}">
+                    </a>
+
+                    <p>Price: <span th:text="${o.price}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

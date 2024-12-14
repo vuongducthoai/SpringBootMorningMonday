@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Class</title>
+</head>
+<body>
+  <form method="post" >
+    <div>
+      <label for="code">Code</label>
+      <div>
+        <input type="text" name="code" id="code" th:value="${o.code}">
+      </div>
+    </div>
+    <div>
+      <label for="name">Name</label>
+      <div>
+        <input type="text" name="name" id="name" th:value="${o.name}">
+      </div>
+    </div>
+    <div>
+      <button>Save Changes</button>
+    </div>
+  </form>
+</body>
+</html>

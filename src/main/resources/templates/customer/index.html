@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer List</title>
+  <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid">
+<a href="/customer/import" class="btn btn-outline-primary">Import</a>
+  <ul class="pagination">
+    <li class="page-item" th:each="i: ${#numbers.sequence(1, list.totalPages)}">
+      <a class="page-link" th:href="@{/customer/{p}(p=${i})}" th:text="'Page ' + ${i}"></a>
+    </li>
+  </ul>
+<table class="table table-bordered">
+  <thead class="table-dark">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Company</th>
+    <th>City</th>
+    <th>Country</th>
+    <th>Phone 1</th>
+    <th>Phone 2</th>
+    <th>Email</th>
+    <th>Subscription Date</th>
+    <th>Website</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="o : ${list}">
+    <td th:text="${o.firstName}"></td>
+    <td th:text="${o.lastName}"></td>
+    <td th:text="${o.company}"></td>
+    <td th:text="${o.city}"></td>
+    <td th:text="${o.country}"></td>
+    <td th:text="${o.phone1}"></td>
+    <td th:text="${o.phone2}"></td>
+    <td th:text="${o.email}"></td>
+    <td th:text="${#dates.format(o.subscriptionDate, 'dd/MM/yyyy')}"></td>
+    <td th:text="${o.website}"></td>
+  </tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>

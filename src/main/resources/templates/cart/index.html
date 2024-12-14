@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Command</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="o : ${list}">
+        <td th:text="${o.product.title}"></td>
+        <td>
+            <img width="100" th:src="@{/img/{url}(url=${o.product.imageUrl})}" th:alt="${o.product.title}">
+        </td>
+        <td th:text="${o.product.price}">
+        </td>
+        <td th:text="${o.quantity}">
+        </td>
+        <td th:text="${o.quantity * o.product.price}">
+        </td>
+        <td>
+            <a class="btn btn-outline-primary" th:href="@{/cart/delete/{id}(id=${o.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script>
+    $('.qty').click(function (){
+        let id = $(this).attr('v');
+        let qty = $(this).val();
+        console.log(id);
+        console.log(qty);
+        $.post('cart/edit', {'id': id, 'quantity': qty}, (d) => {
+            console.log(d);
+            window.location.reload();
+        });
+    });
+</script>
